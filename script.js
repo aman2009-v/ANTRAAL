@@ -51,19 +51,19 @@ window.addEventListener('scroll', () => {
 })();
 
 // Countdown Timer
-const eventDate = new Date('2024-11-05').getTime();
+const eventDate = new Date('2026-07-26').getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
-    const distance = eventDate - now;
+    const timeLeft = eventDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
 
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
 }
 
 setInterval(updateCountdown, 1000);
@@ -161,4 +161,20 @@ window.addEventListener('scroll', () => {
         centralHourglass.style.transform = `translate(-50%, calc(-50% + ${yPos}px))`;
     }
 });
+
+// Handle submit button functionality
+const submitButton = document.querySelector('.btn-submit');
+if (submitButton) {
+    submitButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        // Validate form fields (optional, add validation logic here)
+        const form = document.getElementById('registration-form');
+        if (form.checkValidity()) {
+            form.submit(); // Submit the form if valid
+        } else {
+            alert('Please fill out all required fields.');
+        }
+    });
+}
 
