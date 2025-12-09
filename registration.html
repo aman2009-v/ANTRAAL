@@ -14,6 +14,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
+                <img src="ASSETS/888.jpg" alt="THE ANTRAAL MUN hourglass logo" class="logo-image">
                 <span class="logo-text">ANTRAAL</span>
             </div>
             <ul class="nav-menu">
@@ -60,6 +61,7 @@
                     <span class="step-number">3</span>
                     <span class="step-label">Payment</span>
                 </div>
+                <button id="clear-draft" type="button" title="Clear saved draft" style="margin-left:16px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--minor-color);padding:6px 10px;border-radius:8px;">Clear draft</button>
             </div>
 
             <!-- Form Container -->
@@ -226,86 +228,205 @@
 
     <script src="script.js"></script>
     <script>
-        // Multi-stage form logic
-        const formSteps = document.querySelectorAll('.form-step');
-        const progressSteps = document.querySelectorAll('.progress-step');
+    (function () {
+        // Toggle this to control registration availability.
+        // Set to `false` to show the closed message instead of the form.
+        window.REGISTRATION_OPEN = true;
+
+        // Helper to change availability at runtime (reloads page to re-init)
+        window.setRegistrationOpen = function(flag) {
+            window.REGISTRATION_OPEN = !!flag;
+            // Reload so scripts either initialize or exit cleanly
+            window.location.reload();
+        };
+
+        // Robust autosave for the multi-step registration form
+        const STORAGE_KEY = 'registrationFormData_v1';
+        const MAX_FILE_BYTES = 1.5 * 1024 * 1024; // 1.5 MB
+
+        const form = document.getElementById('registration-form');
+        const formSteps = Array.from(document.querySelectorAll('.form-step'));
+        const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+        const btnNext = Array.from(document.querySelectorAll('.btn-next'));
+        const btnPrev = Array.from(document.querySelectorAll('.btn-prev'));
+        const clearDraftBtn = document.getElementById('clear-draft');
+
         let currentStep = 0;
+        let saveTimer = null;
 
-        function showStep(step) {
-            formSteps.forEach((s, i) => {
-                s.classList.toggle('active', i === step);
-            });
-            progressSteps.forEach((s, i) => {
-                s.classList.toggle('active', i <= step);
-            });
-            currentStep = step;
+        // debounce helper
+        function debounce(fn, wait = 300) {
+            return function () {
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(fn, wait);
+            };
         }
 
-        document.querySelectorAll('.btn-next').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (currentStep < formSteps.length - 1) {
-                    showStep(currentStep + 1);
-                }
-            });
-        });
-
-        document.querySelectorAll('.btn-prev').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (currentStep > 0) {
-                    showStep(currentStep - 1);
-                }
-            });
-        });
-
-        // Form submission
-        document.getElementById('registration-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Registration submitted successfully! We will contact you soon.');
-            this.submit();
-        });
-
-        // Function to save form data to localStorage
-        function saveFormData() {
-            const form = document.getElementById('registration-form');
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-            localStorage.setItem('registrationFormData', JSON.stringify(data));
+        // Set visible step
+        function setStep(index, skipSave = false) {
+            index = Math.max(0, Math.min(index, formSteps.length - 1));
+            formSteps.forEach((s, i) => s.classList.toggle('active', i === index));
+            progressSteps.forEach((s, i) => s.classList.toggle('active', i <= index));
+            currentStep = index;
+            if (!skipSave) saveFormData();
         }
 
-        // Function to restore form data from localStorage
-        function restoreFormData() {
-            const savedData = localStorage.getItem('registrationFormData');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                for (const key in data) {
-                    const field = document.querySelector(`[name="${key}"]`);
-                    if (field) {
-                        if (field.type === 'checkbox' || field.type === 'radio') {
-                            field.checked = field.value === data[key];
-                        } else {
-                            field.value = data[key];
-                        }
-                    }
+        // Attach step buttons
+        function attachStepButtons() {
+            btnNext.forEach(btn => btn.addEventListener('click', () => setStep(currentStep + 1)));
+            btnPrev.forEach(btn => btn.addEventListener('click', () => setStep(currentStep - 1)));
+        }
+
+        // Collect form data (including small image as DataURL)
+        function collectFormData() {
+            const data = { __meta: { savedAt: Date.now(), step: currentStep } };
+            const fields = form.querySelectorAll('input, textarea, select');
+            fields.forEach(f => {
+                const name = f.name || f.id;
+                if (!name) return;
+                if (f.type === 'file') return; // file handled separately
+                if (f.type === 'checkbox') data[name] = f.checked;
+                else if (f.type === 'radio') { if (f.checked) data[name] = f.value; }
+                else data[name] = f.value;
+            });
+
+            const fileInput = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                if (file.size <= MAX_FILE_BYTES) {
+                    return new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            data.__file = { name: file.name, type: file.type, dataURL: reader.result };
+                            resolve(data);
+                        };
+                        reader.onerror = () => resolve(data);
+                        reader.readAsDataURL(file);
+                    });
                 }
+            }
+            return Promise.resolve(data);
+        }
+
+        // Save to localStorage (async-safe)
+        async function saveFormData() {
+            try {
+                const data = await collectFormData();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (err) {
+                console.warn('Could not save form data', err);
+            }
+        }
+        const debouncedSave = debounce(saveFormData, 350);
+
+        // Restore file preview and attempt to set input.files
+        async function restoreFileInput(data) {
+            if (!data || !data.__file) return;
+            const fileMeta = data.__file;
+            const input = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (!input) return;
+
+            // create preview area
+            let preview = document.getElementById('__payment_preview');
+            if (!preview) {
+                preview = document.createElement('div');
+                preview.id = '__payment_preview';
+                preview.style.margin = '0.5rem 0';
+                input.parentNode.insertBefore(preview, input.nextSibling);
+            }
+            preview.innerHTML = '<strong>Restored screenshot preview:</strong>';
+            const img = document.createElement('img');
+            img.src = fileMeta.dataURL;
+            img.alt = 'Saved payment screenshot preview';
+            img.style.maxWidth = '220px';
+            img.style.maxHeight = '160px';
+            img.style.display = 'block';
+            img.style.objectFit = 'cover';
+            preview.appendChild(img);
+
+            // Try to set input.files (may be blocked in some browsers)
+            try {
+                const res = await fetch(fileMeta.dataURL);
+                const blob = await res.blob();
+                const restoredFile = new File([blob], fileMeta.name || 'payment.png', { type: fileMeta.type || blob.type });
+                const dt = new DataTransfer();
+                dt.items.add(restoredFile);
+                input.files = dt.files;
+                } catch (err) {
+                console.warn('Could not restore input.files programmatically', err);
             }
         }
 
-        // Function to clear form data from localStorage on submission
-        function clearFormData() {
-            localStorage.removeItem('registrationFormData');
+        // Restore form from storage
+        function restoreFormData() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            let data = null;
+            try { data = JSON.parse(raw); } catch { return; }
+
+            const fields = form.querySelectorAll('input, textarea, select');
+            fields.forEach(f => {
+                const name = f.name || f.id;
+                if (!name) return;
+                if (f.type === 'file') return;
+                if (f.type === 'checkbox') { f.checked = !!data[name]; }
+                else if (f.type === 'radio') { if (data[name] !== undefined) f.checked = (f.value === data[name]); }
+                else if (data[name] !== undefined) { f.value = data[name]; }
+            });
+
+            if (data.__meta && typeof data.__meta.step === 'number') setStep(data.__meta.step, true);
+            if (data.__file) { restoreFileInput(data).catch(() => {}); }
         }
 
-        // Attach event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            restoreFormData(); // Restore data on page load
+        // Clear saved draft
+        function clearDraft() {
+            localStorage.removeItem(STORAGE_KEY);
+            const preview = document.getElementById('__payment_preview');
+            if (preview) preview.remove();
+            alert('Saved draft cleared.');
+        }
 
-            const form = document.getElementById('registration-form');
-            form.addEventListener('input', saveFormData); // Save data on input change
-            form.addEventListener('submit', clearFormData); // Clear data on form submission
+        // Attach listeners and initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // If registration is closed, replace the form with a notice and exit early
+            if (!window.REGISTRATION_OPEN) {
+                const formContainer = document.querySelector('.form-container');
+                if (formContainer) {
+                    formContainer.innerHTML = '<div class="registration-closed"><h2>Registration will open soon</h2><p>Please check back later or contact us at <a href="contact.html">Contact</a>.</p></div>';
+                }
+                const clearBtn = document.getElementById('clear-draft');
+                if (clearBtn) clearBtn.style.display = 'none';
+                return; // do not initialize form listeners or autosave
+            }
+
+            attachStepButtons();
+            restoreFormData();
+
+            // save on input/change
+            form.addEventListener('input', debouncedSave, { capture: true });
+            form.addEventListener('change', debouncedSave, { capture: true });
+
+            // file input immediate save
+            const fileInput = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (fileInput) {
+                fileInput.addEventListener('change', async () => {
+                    const file = fileInput.files && fileInput.files[0];
+                    if (file && file.size > MAX_FILE_BYTES) {
+                        alert('Selected image is too large to autosave (>1.5MB). Please re-upload before submitting if needed.');
+                    }
+                    await saveFormData();
+                });
+            }
+
+            if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+
+            // on submit: clear draft and proceed
+            form.addEventListener('submit', (e) => {
+                // Allow normal submission but clear saved draft
+                localStorage.removeItem(STORAGE_KEY);
+            });
         });
+    })();
     </script>
 </body>
 </html>
