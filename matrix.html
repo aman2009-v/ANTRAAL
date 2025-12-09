@@ -10,45 +10,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">ANTRAAL</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="matrix.html" class="active">Committees</a></li>
-                <li><a href="team.html">Core Team</a></li>
-                <li><a href="registration.html" class="nav-register-btn">Register</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar (injected by components.js) -->
+    <div id="site-nav"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="wave-pattern"></div>
-        </div>
-        <div class="hero-content" style="min-height: auto; padding: 8rem 0 4rem;">
-            <h1 class="hero-title" style="font-size: 4rem;">Committees</h1>
-            <p class="hero-subtitle">The Arenas of Diplomacy</p>
-        </div>
-    </section>
+    <!-- Hero (injected by components.js) -->
+    <div id="site-hero"></div>
 
     <!-- Committees Section -->
     <section class="committees-section">
         <div class="container">
             <div class="committee-grid">
                 <!-- UNHRC -->
-                <div class="committee-card" id="unhrc">
+                <div class="committee-card" id="unhrc" role="button" tabindex="0" aria-label="UNHRC committee card">
                     <div class="committee-card-inner">
                         <div class="committee-card-front">
                             <div class="committee-icon">⚖️</div>
@@ -63,12 +36,16 @@
                             <p>To be announced</p>
                             <h3>Description</h3>
                             <p>The United Nations Human Rights Council is an intergovernmental body responsible for promoting and protecting human rights around the world. Delegates will address critical issues of human rights violations and work towards effective solutions.</p>
+                            <div class="card-actions">
+                                <a class="learn-more-btn" href="matrix.html#unhrc">Learn more</a>
+                                <a class="apply-btn" href="registration.html">Apply →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- UNGA -->
-                <div class="committee-card" id="unga">
+                <div class="committee-card" id="unga" role="button" tabindex="0" aria-label="UNGA committee card">
                     <div class="committee-card-inner">
                         <div class="committee-card-front">
                             <div class="committee-icon">🌍</div>
@@ -83,12 +60,16 @@
                             <p>To be announced</p>
                             <h3>Description</h3>
                             <p>The United Nations General Assembly is the main deliberative, policymaking and representative organ of the UN. Delegates will debate global issues and work towards comprehensive resolutions.</p>
+                            <div class="card-actions">
+                                <a class="learn-more-btn" href="matrix.html#unga">Learn more</a>
+                                <a class="apply-btn" href="registration.html">Apply →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- AIPPM -->
-                <div class="committee-card" id="aippm">
+                <div class="committee-card" id="aippm" role="button" tabindex="0" aria-label="AIPPM committee card">
                     <div class="committee-card-inner">
                         <div class="committee-card-front">
                             <div class="committee-icon">🏛️</div>
@@ -103,12 +84,16 @@
                             <p>To be announced</p>
                             <h3>Description</h3>
                             <p>The All India Political Parties Meet brings together representatives from various political parties to discuss and deliberate on national issues. This committee focuses on Indian domestic policies and political discourse.</p>
+                            <div class="card-actions">
+                                <a class="learn-more-btn" href="matrix.html#aippm">Learn more</a>
+                                <a class="apply-btn" href="registration.html">Apply →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- LOK SABHA -->
-                <div class="committee-card" id="loksabha">
+                <div class="committee-card" id="loksabha" role="button" tabindex="0" aria-label="Lok Sabha committee card">
                     <div class="committee-card-inner">
                         <div class="committee-card-front">
                             <div class="committee-icon">📜</div>
@@ -123,6 +108,10 @@
                             <p>To be announced</p>
                             <h3>Description</h3>
                             <p>Lok Sabha is the lower house of India's Parliament. Delegates will simulate parliamentary proceedings, debate bills, and work towards passing legislation that addresses critical national issues.</p>
+                            <div class="card-actions">
+                                <a class="learn-more-btn" href="matrix.html#loksabha">Learn more</a>
+                                <a class="apply-btn" href="registration.html">Apply →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,46 +119,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>ANTRAL MUN</h3>
-                    <p>THE FIRST HOUR</p>
-                    <p>November 5, 2024</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="matrix.html">Committees</a></li>
-                        <li><a href="team.html">Core Team</a></li>
-                        <li><a href="registration.html">Register</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Committees</h4>
-                    <ul>
-                        <li>UNHRC</li>
-                        <li>UNGA</li>
-                        <li>AIPPM</li>
-                        <li>LOK SABHA</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <a href="https://www.instagram.com/theantraalmun/" target="_blank" class="social-link">Instagram</a>
-                    <a href="contact.html" class="social-link">Contact Us</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 ANTRAL MUN. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer (injected by components.js) -->
+    <div id="site-footer"></div>
 
+    <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
