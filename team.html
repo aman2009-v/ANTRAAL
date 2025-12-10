@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Core Team - ANTRAAL MUN</title>
+    <title>Register - ANTRAAL MUN</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="matrix.html">Committees</a></li>
-                <li><a href="team.html" class="active">Core Team</a></li>
-                <li><a href="registration.html" class="nav-register-btn">Register</a></li>
+                <li><a href="team.html">Core Team</a></li>
+                <li><a href="registration.html" class="nav-register-btn active">Register</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -39,164 +39,149 @@
             <div class="wave-pattern"></div>
         </div>
         <div class="hero-content" style="min-height: auto; padding: 8rem 0 4rem;">
-            <h1 class="hero-title" style="font-size: 4rem;">Core Team</h1>
-            <p class="hero-subtitle">Meet the Faces Behind<br>ANTRAAL OF FIRST Edition</p>
+            <h1 class="hero-title" style="font-size: 4rem;">Register Now</h1>
+            <p class="hero-subtitle">Join The First Hour</p>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team-section">
+    <!-- Registration Form -->
+    <section class="registration-section">
         <div class="container">
-            <div class="team-grid">
-                <!-- Yashveer Ohri -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/yashveer.png" alt="Yashveer Ohri">
-                            <p class="title name">Yashveer Ohri</p>
-                            <p class="role">FOUNDER PRESIDENT</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/y.4shh_?igsh=MWg2dDFsd3ZhZ2tuYQ==" target="_blank">View Profile</a>
-                        </div>
-                    </div>
+            <!-- Progress Indicator -->
+            <div class="form-progress">
+                <div class="progress-step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Personal Details</span>
                 </div>
+                <div class="progress-step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Committee Preferences</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Payment</span>
+                </div>
+                <button id="clear-draft" type="button" title="Clear saved draft" style="margin-left:16px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--minor-color);padding:6px 10px;border-radius:8px;">Clear draft</button>
+            </div>
 
-                <!-- Arjit Banik -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/arjit banik.png" alt="Arjit Banik">
-                            <p class="title name">Arjit Banik</p>
-                            <p class="role">CHIEF ADVISOR</p>
+            <!-- Form Container -->
+            <div class="form-container">
+                <form id="registration-form" action="https://formsubmit.co/yadavamanjeet317@gmail.com" method="POST" enctype="multipart/form-data">
+                    <!-- Step 1: Personal Details -->
+                    <div class="form-step active" id="step1">
+                        <h2>Personal Details</h2>
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/arij.2109_" target="_blank">View Profile</a>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="school">School/College *</label>
+                            <input type="text" id="school" name="school" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="grade">Grade/Year *</label>
+                            <input type="text" id="grade" name="grade" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age *</label>
+                            <input type="number" id="age" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="munExperience">MUN Experience (Optional)</label>
+                            <textarea id="munExperience" name="munExperience" rows="3" placeholder="Brief description of your MUN experience"></textarea>
+                        </div>
+                        <button type="button" class="btn-next">Next →</button>
                     </div>
-                </div>
 
-                <!-- Rupashi Goyal -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/rupashi goyal.png" alt="Rupashi Goyal">
-                            <p class="title name">Rupashi Goyal</p>
-                            <p class="role">SENIOR ADVISORY</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/totallynotherr_07" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Step 2: Committee Preferences -->
+                    <div class="form-step" id="step2">
+                        <h2>Committee Preferences</h2>
+                        <p style="color: #d387a4; margin-bottom: 2rem;">Please refer to the <a href="matrix.html" style="color: #d387a4;">matrix page</a> for detailed information about committees.</p>
 
-                <!-- Utkarsh -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/utkarsh.png" alt="Utkarsh">
-                            <p class="title name">Utkarsh</p>
-                            <p class="role">SECRETARY GENERAL</p>
+                        <div class="form-group">
+                            <label for="preference1">Committee Preference 1 *</label>
+                            <select id="preference1" name="preference1" required>
+                                <option value="">Select Committee</option>
+                                <option value="UNHRC">UNHRC - United Nations Human Rights Council</option>
+                                <option value="UNGA">UNGA - United Nations General Assembly</option>
+                                <option value="AIPPM">AIPPM - All India Political Parties Meet</option>
+                                <option value="LOK_SABHA">LOK SABHA</option>
+                            </select>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/utkarsxh41/" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Samrit Singh -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/samrit singh.png" alt="Samrit Singh">
-                            <p class="title name">Samrit Singh</p>
-                            <p class="role">DEPUTY SECRETARY GENERAL</p>
+                        <div class="form-group">
+                            <label for="portfolioPreference1">Portfolio Preference 1 *</label>
+                            <input type="text" id="portfolioPreference1" name="portfolioPreference1" required>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/saachineedsafacecard" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Mahika -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/mahika.png" alt="Mahika">
-                            <p class="title name">Mahika</p>
-                            <p class="role">DIRECTOR GENERAL</p>
+                        <div class="form-group">
+                            <label for="preference2">Committee Preference 2 *</label>
+                            <select id="preference2" name="preference2" required>
+                                <option value="">Select Committee</option>
+                                <option value="UNHRC">UNHRC - United Nations Human Rights Council</option>
+                                <option value="UNGA">UNGA - United Nations General Assembly</option>
+                                <option value="AIPPM">AIPPM - All India Political Parties Meet</option>
+                                <option value="LOK_SABHA">LOK SABHA</option>
+                            </select>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/_mmahhika_/" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Dakshita -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/dakshita.png" alt="Dakshita">
-                            <p class="title name">Dakshita</p>
-                            <p class="role">DEPUTY DIRECTOR GENERAL</p>
+                        <div class="form-group">
+                            <label for="portfolioPreference2">Portfolio Preference 2 *</label>
+                            <input type="text" id="portfolioPreference2" name="portfolioPreference2" required>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/dumbdaki" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Ishita -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/ishita.png" alt="Ishita">
-                            <p class="title name">Ishita</p>
-                            <p class="role">MANAGEMENT DIRECTOR</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/who_ishita" target="_blank">View Profile</a>
+                        <div style="display: flex; gap: 1rem;">
+                            <button type="button" class="btn-prev">← Previous</button>
+                            <button type="button" class="btn-next">Next →</button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Pareekshit Nair -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/pareekshit nair.png" alt="Pareekshit Nair">
-                            <p class="title name">Pareekshit Nair</p>
-                            <p class="role">CONFERENCE CONVENER</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/f8_crusader_is_ass_pareekshit" target="_blank">View Profile</a>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Step 3: Payment -->
+                    <div class="form-step" id="step3">
+                        <h2>Payment</h2>
+                        <div class="payment-info">
+                            <div class="qr-section">
+                                <h3>Scan QR Code to Pay</h3>
+                                <div class="qr-placeholder">
+                                    <p>QR Code Placeholder</p>
+                                    <p style="font-size: 0.9rem; color: #b0b0b0;">(Add your actual QR code image here)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transactionId">Transaction ID (Optional)</label>
+                                <input type="text" id="transactionId" name="transactionId" placeholder="Enter your transaction ID">
+                            </div>
 
-                <!-- Harsh Raj -->
-                <div class="flip-card" tabindex="0">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img class="photo" src="ASSETS/team members/harsh raj.png" alt="Harsh Raj">
-                            <p class="title name">Harsh Raj</p>
-                            <p class="role">CREATIVE HEAD</p>
+                            <div class="form-group">
+                                <label for="paymentScreenshot">Payment Screenshot *</label>
+                                <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                            </div>
+
+                            <div class="final-info">
+                                <p><strong>Amount to be Paid:</strong> (Add amount)</p>
+                                <p><strong>Account Details:</strong> (Add account details)</p>
+                            </div>
                         </div>
-                        <div class="flip-card-back">
-                            <p class="title">Profile</p>
-                            <a class="view-btn" href="https://www.instagram.com/ic.harsh/" target="_blank">View Profile</a>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <button type="button" class="btn-prev">← Previous</button>
+                            <button type="submit" class="btn-submit">Submit Registration</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
@@ -220,7 +205,15 @@
                         <li><a href="registration.html">Register</a></li>
                     </ul>
                 </div>
-                
+                <div class="footer-section">
+                    <h4>Committees</h4>
+                    <ul>
+                        <li>UNHRC</li>
+                        <li>UNGA</li>
+                        <li>AIPPM</li>
+                        <li>LOK SABHA</li>
+                    </ul>
+                </div>
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <a href="https://www.instagram.com/theantraalmun/" target="_blank" class="social-link">Instagram</a>
@@ -228,12 +221,213 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 THE ANTRAAL MUN. All rights reserved.</p>
+                <p>&copy; 2025 THE ANTRAAL MUN. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+    (function () {
+        // Toggle this to control registration availability.
+        // Set to `false` to show the closed message instead of the form.
+        window.REGISTRATION_OPEN = true;
+
+        // Helper to change availability at runtime (reloads page to re-init)
+        window.setRegistrationOpen = function(flag) {
+            window.REGISTRATION_OPEN = !!flag;
+            // Reload so scripts either initialize or exit cleanly
+            window.location.reload();
+        };
+
+        // Robust autosave for the multi-step registration form
+        const STORAGE_KEY = 'registrationFormData_v1';
+        const MAX_FILE_BYTES = 1.5 * 1024 * 1024; // 1.5 MB
+
+        const form = document.getElementById('registration-form');
+        const formSteps = Array.from(document.querySelectorAll('.form-step'));
+        const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+        const btnNext = Array.from(document.querySelectorAll('.btn-next'));
+        const btnPrev = Array.from(document.querySelectorAll('.btn-prev'));
+        const clearDraftBtn = document.getElementById('clear-draft');
+
+        let currentStep = 0;
+        let saveTimer = null;
+
+        // debounce helper
+        function debounce(fn, wait = 300) {
+            return function () {
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(fn, wait);
+            };
+        }
+
+        // Set visible step
+        function setStep(index, skipSave = false) {
+            index = Math.max(0, Math.min(index, formSteps.length - 1));
+            formSteps.forEach((s, i) => s.classList.toggle('active', i === index));
+            progressSteps.forEach((s, i) => s.classList.toggle('active', i <= index));
+            currentStep = index;
+            if (!skipSave) saveFormData();
+        }
+
+        // Attach step buttons
+        function attachStepButtons() {
+            btnNext.forEach(btn => btn.addEventListener('click', () => setStep(currentStep + 1)));
+            btnPrev.forEach(btn => btn.addEventListener('click', () => setStep(currentStep - 1)));
+        }
+
+        // Collect form data (including small image as DataURL)
+        function collectFormData() {
+            const data = { __meta: { savedAt: Date.now(), step: currentStep } };
+            const fields = form.querySelectorAll('input, textarea, select');
+            fields.forEach(f => {
+                const name = f.name || f.id;
+                if (!name) return;
+                if (f.type === 'file') return; // file handled separately
+                if (f.type === 'checkbox') data[name] = f.checked;
+                else if (f.type === 'radio') { if (f.checked) data[name] = f.value; }
+                else data[name] = f.value;
+            });
+
+            const fileInput = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                if (file.size <= MAX_FILE_BYTES) {
+                    return new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            data.__file = { name: file.name, type: file.type, dataURL: reader.result };
+                            resolve(data);
+                        };
+                        reader.onerror = () => resolve(data);
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+            return Promise.resolve(data);
+        }
+
+        // Save to localStorage (async-safe)
+        async function saveFormData() {
+            try {
+                const data = await collectFormData();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (err) {
+                console.warn('Could not save form data', err);
+            }
+        }
+        const debouncedSave = debounce(saveFormData, 350);
+
+        // Restore file preview and attempt to set input.files
+        async function restoreFileInput(data) {
+            if (!data || !data.__file) return;
+            const fileMeta = data.__file;
+            const input = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (!input) return;
+
+            // create preview area
+            let preview = document.getElementById('__payment_preview');
+            if (!preview) {
+                preview = document.createElement('div');
+                preview.id = '__payment_preview';
+                preview.style.margin = '0.5rem 0';
+                input.parentNode.insertBefore(preview, input.nextSibling);
+            }
+            preview.innerHTML = '<strong>Restored screenshot preview:</strong>';
+            const img = document.createElement('img');
+            img.src = fileMeta.dataURL;
+            img.alt = 'Saved payment screenshot preview';
+            img.style.maxWidth = '220px';
+            img.style.maxHeight = '160px';
+            img.style.display = 'block';
+            img.style.objectFit = 'cover';
+            preview.appendChild(img);
+
+            // Try to set input.files (may be blocked in some browsers)
+            try {
+                const res = await fetch(fileMeta.dataURL);
+                const blob = await res.blob();
+                const restoredFile = new File([blob], fileMeta.name || 'payment.png', { type: fileMeta.type || blob.type });
+                const dt = new DataTransfer();
+                dt.items.add(restoredFile);
+                input.files = dt.files;
+                } catch (err) {
+                console.warn('Could not restore input.files programmatically', err);
+            }
+        }
+
+        // Restore form from storage
+        function restoreFormData() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            let data = null;
+            try { data = JSON.parse(raw); } catch { return; }
+
+            const fields = form.querySelectorAll('input, textarea, select');
+            fields.forEach(f => {
+                const name = f.name || f.id;
+                if (!name) return;
+                if (f.type === 'file') return;
+                if (f.type === 'checkbox') { f.checked = !!data[name]; }
+                else if (f.type === 'radio') { if (data[name] !== undefined) f.checked = (f.value === data[name]); }
+                else if (data[name] !== undefined) { f.value = data[name]; }
+            });
+
+            if (data.__meta && typeof data.__meta.step === 'number') setStep(data.__meta.step, true);
+            if (data.__file) { restoreFileInput(data).catch(() => {}); }
+        }
+
+        // Clear saved draft
+        function clearDraft() {
+            localStorage.removeItem(STORAGE_KEY);
+            const preview = document.getElementById('__payment_preview');
+            if (preview) preview.remove();
+            alert('Saved draft cleared.');
+        }
+
+        // Attach listeners and initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // If registration is closed, replace the form with a notice and exit early
+            if (!window.REGISTRATION_OPEN) {
+                const formContainer = document.querySelector('.form-container');
+                if (formContainer) {
+                    formContainer.innerHTML = '<div class="registration-closed"><h2>Registration will open soon</h2><p>Please check back later or contact us at <a href="contact.html">Contact</a>.</p></div>';
+                }
+                const clearBtn = document.getElementById('clear-draft');
+                if (clearBtn) clearBtn.style.display = 'none';
+                return; // do not initialize form listeners or autosave
+            }
+
+            attachStepButtons();
+            restoreFormData();
+
+            // save on input/change
+            form.addEventListener('input', debouncedSave, { capture: true });
+            form.addEventListener('change', debouncedSave, { capture: true });
+
+            // file input immediate save
+            const fileInput = form.querySelector('input[type="file"][name="paymentScreenshot"]');
+            if (fileInput) {
+                fileInput.addEventListener('change', async () => {
+                    const file = fileInput.files && fileInput.files[0];
+                    if (file && file.size > MAX_FILE_BYTES) {
+                        alert('Selected image is too large to autosave (>1.5MB). Please re-upload before submitting if needed.');
+                    }
+                    await saveFormData();
+                });
+            }
+
+            if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+
+            // on submit: clear draft and proceed
+            form.addEventListener('submit', (e) => {
+                // Allow normal submission but clear saved draft
+                localStorage.removeItem(STORAGE_KEY);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
 
