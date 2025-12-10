@@ -12,8 +12,10 @@
 /* --- Flip-card styles (from Uiverse.io by joe-watson-sbf) --- */
 .flip-card {
     background-color: transparent;
-    width: 190px;
-    height: 254px;
+    /* make cards fluid: allow grid to control width but cap size for large screens */
+    width: 100%;
+    max-width: 220px;
+    min-width: 150px;
     perspective: 1000px;
     font-family: sans-serif;
 }
@@ -28,6 +30,8 @@
 .flip-card-inner {
     position: relative;
     width: 100%;
+    /* keep a consistent card height while allowing vertical growth on small screens */
+    min-height: 254px;
     height: 100%;
     text-align: center;
     transition: transform 0.8s;
@@ -51,7 +55,9 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 1rem;
-    overflow: hidden;
+    /* allow internal content to scroll instead of being clipped when flipped */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .flip-card-front {
@@ -82,7 +88,10 @@
     background: linear-gradient(180deg, rgba(211,135,164,0.98) 0%, rgba(125,15,54,0.9) 90%);
     color: var(--text-light);
     transform: rotateY(180deg);
+    /* place content at the top when flipped, leave a small gap */
     padding: 1rem;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .flip-card-back .role {
@@ -103,13 +112,17 @@
 }
 
 /* ensure flip-cards work nicely inside the existing grid */
-.team-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 1rem; 
-    justify-items: center; 
+
+.team-grid {
+    display: grid;
+    /* let the grid create as many columns as fit, with a sensible min card width */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
 }
-.team-grid .flip-card { margin: 0.6rem; }
+.team-grid .flip-card { margin: 0.4rem; }
 
 /* Make first card centered and spanning full width to create a tree top */
 .team-grid .flip-card:nth-child(1) {
@@ -119,13 +132,11 @@
 }
 
 /* Ensure 3-per-row below; for smaller screens switch to 1 or 2 columns */
-@media (max-width: 900px) {
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
-    .team-grid .flip-card:nth-child(1) { grid-column: 1 / -1; }
-}
-
+/* fallback tweaks for narrow screens */
 @media (max-width: 520px) {
     .team-grid { grid-template-columns: 1fr; }
+    .team-grid .flip-card { max-width: 360px; }
+    .team-grid .flip-card:nth-child(1) { max-width: 420px; }
 }
 
 
