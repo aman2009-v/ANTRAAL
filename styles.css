@@ -1224,6 +1224,17 @@ html,body { height: 100%; }
     .committee-card:hover .committee-card-inner {
         transform: rotateY(180deg);
     }
+    /* But don't override explicit flipped state on click */
+    .committee-card.flipped .committee-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
+/* For touch devices, use click-based flipping */
+@media (hover: none) {
+    .committee-card.flipped .committee-card-inner {
+        transform: rotateY(180deg);
+    }
 }
 
 .committee-icon {
