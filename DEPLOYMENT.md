@@ -1,4 +1,4 @@
-# ANTRAL MUN Website - Quick Deployment Guide
+# ANTRAAL MUN Website - Quick Deployment Guide
 
 ## 🚀 Easy Deployment (Just Open index.html!)
 
@@ -13,13 +13,13 @@ The website is **fully static** and requires **NO server setup**. Simply:
 ### Option 1: GitHub Pages (Free, Easy)
 
 1. Create a GitHub account at https://github.com
-2. Create a new repository (e.g., "antral-mun-website")
+2. Create a new repository (e.g., "antraal-mun-website")
 3. Upload all files to the repository
 4. Go to: Settings → Pages
 5. Select: "Deploy from a branch" → "main" branch → "/ (root)"
 6. Click: Save
 7. Wait 1-2 minutes
-8. Your site is live at: `https://yourusername.github.io/antral-mun-website/`
+8. Your site is live at: `https://yourusername.github.io/antraal-mun-website/`
 
 ### Option 2: Netlify (Free, Instant)
 
@@ -87,7 +87,7 @@ Edit `styles.css` line 3-4:
 **Changing Event Date:**
 Edit `script.js` line 15:
 ```javascript
-const eventDate = new Date('2024-11-05').getTime();
+const eventDate = new Date('2025-08-31').getTime();
 ```
 
 **Changing Email:**
